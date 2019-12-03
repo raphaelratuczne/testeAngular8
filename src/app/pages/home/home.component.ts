@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { MyServiceService } from '../../services/my-service.service';
 
@@ -9,12 +10,34 @@ import { MyServiceService } from '../../services/my-service.service';
 })
 export class HomeComponent implements OnInit {
 
-  public texto;
+  // public texto;
+  public people;
+  public loading = true;
 
-  constructor(private service: MyServiceService) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  async ngOnInit() {
-    this.texto = await this.service.teste();
+  constructor(private service: MyServiceService) {}
+
+  ngOnInit() {
+    this.goPage();
+    console.log('people',this.people);
+
+    this.paginator.page.subscribe(async () => {
+      console.log('pageIndex',this.paginator.pageIndex);
+      this.goPage(this.paginator.pageIndex);
+    });
+  }
+
+  async goPage(page = 0) {
+    try {
+      this.loading = true;
+      //this.people = [];
+      this.people = await this.service.getListPeople(page+1);
+    } catch(e) {
+      console.log(e);
+    } finally {
+      this.loading = false;
+    }
   }
 
 }

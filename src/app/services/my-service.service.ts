@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+const api = 'https://swapi.co/api/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MyServiceService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  teste() {
-    return 'retorno service';
+  public getListPeople(page = 1): Promise<any> {
+    return this.http.get(`${api}people/?page=${page}`).toPromise();
   }
 }
