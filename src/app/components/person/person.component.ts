@@ -16,6 +16,8 @@ export class PersonComponent implements OnInit {
   public loadingHomeworld = false;
 
   public homeworld: Map<number,string> = new Map();
+  public starships = {};
+  public displayedColumns: string[] = ['id', 'url'];
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -26,7 +28,6 @@ export class PersonComponent implements OnInit {
     console.log('people',this.people);
 
     this.paginator.page.subscribe(async () => {
-      console.log('pageIndex',this.paginator.pageIndex);
       this.goPage(this.paginator.pageIndex);
     });
   }
@@ -37,6 +38,10 @@ export class PersonComponent implements OnInit {
       //this.people = [];
       this.people = await this.service.getListPeople(page+1);
       this.total = this.people.count;
+      this.starships = {};
+      for(const person of this.people.results) {
+        this.starships[ this.getId(person.url) ] = person.starships.map(s => ({ id: this.getId(s), url: s }));
+      }
     } catch(e) {
       console.log(e);
     } finally {
@@ -45,13 +50,11 @@ export class PersonComponent implements OnInit {
   }
 
   async expanded(person) {
-    console.log('expanded person',person);
     const id = this.getId(person.homeworld);
     if (!this.homeworld.get(id)) {
       try {
         this.loadingHomeworld = true;
         const homeworld = await this.service.getData(person.homeworld);
-        console.log('homeworld',homeworld);
         this.homeworld.set(id, homeworld.name);
       } catch(e) {
         console.log(e);
@@ -62,7 +65,6 @@ export class PersonComponent implements OnInit {
   }
 
   getId(prop) {
-    console.log('getId person',prop);
     const arr = prop.split('/');
     return Number(arr[ arr.length - 2 ]);
   }

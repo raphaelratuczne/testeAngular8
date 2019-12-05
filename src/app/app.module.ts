@@ -9,6 +9,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +17,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { MyDirectiveDirective } from './directives/my-directive.directive';
 import { MyPipePipe } from './pipes/my-pipe.pipe';
-import { MyComponentComponent } from './components/my-component/my-component.component';
 import { PersonComponent } from './components/person/person.component';
 import { MyServiceService } from './services/my-service.service';
 
@@ -40,6 +40,7 @@ import { MyServiceService } from './services/my-service.service';
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatTableModule
   ],
   providers: [MyServiceService],
   bootstrap: [AppComponent]
