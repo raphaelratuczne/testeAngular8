@@ -1,0 +1,40 @@
+<mat-paginator #paginator [length]="total" [pageSize]="10" [hidePageSize]="true"></mat-paginator>
+<mat-progress-bar *ngIf="loadingList" mode="query"></mat-progress-bar>
+
+<mat-accordion *ngIf="people && !loadingList">
+  <mat-expansion-panel *ngFor="let person of people.results" (afterExpand)="expanded(person)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ person.name }}
+      </mat-panel-title>
+      <!--<mat-panel-description>
+        {{ person.name }}
+      </mat-panel-description>-->
+    </mat-expansion-panel-header>
+
+    <mat-card>
+      <dl>
+        <dt>Height</dt>
+        <dd>{{ person.height }}</dd>
+        <dt>Mass</dt>
+        <dd>{{ person.mass }}</dd>
+        <dt>Hair Color</dt>
+        <dd>{{ person.hair_color }}</dd>
+        <dt>Skin Color</dt>
+        <dd>{{ person.skin_color }}</dd>
+        <dt>Eye Color</dt>
+        <dd>{{ person.eye_color }}</dd>
+        <dt>Birth Year</dt>
+        <dd>{{ person.birth_year }}</dd>
+        <dt>Gender</dt>
+        <dd>{{ person.gender }}</dd>
+        <dt>Homeworld</dt>
+        <dd>
+          <mat-spinner *ngIf="loadingHomeworld" [diameter]="20"></mat-spinner>
+          {{ homeworld.get( getId(person.homeworld) ) }}
+        </dd>
+      </dl>
+    </mat-card>
+
+  </mat-expansion-panel>
+</mat-accordion>
