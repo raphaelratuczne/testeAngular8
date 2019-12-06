@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -15,8 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
-import { MyDirectiveDirective } from './directives/my-directive.directive';
-import { MyPipePipe } from './pipes/my-pipe.pipe';
 import { PersonComponent } from './components/person/person.component';
 import { MyServiceService } from './services/my-service.service';
 
@@ -24,8 +21,6 @@ import { MyServiceService } from './services/my-service.service';
   declarations: [
     AppComponent,
     HomeComponent,
-    MyDirectiveDirective,
-    MyPipePipe,
     PersonComponent
   ],
   imports: [
@@ -34,7 +29,6 @@ import { MyServiceService } from './services/my-service.service';
     BrowserAnimationsModule,
     HttpClientModule,
     MatToolbarModule,
-    MatTabsModule,
     MatCardModule,
     MatExpansionModule,
     MatPaginatorModule,
